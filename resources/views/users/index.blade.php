@@ -50,13 +50,15 @@
         <div class="overflow-x-auto bg-white rounded-lg shadow">
             <table class="min-w-full divide-y divide-gray-200">
                 @php
-                    function sortUrl($column)
-                    {
-                        $direction = request('sort_direction') === 'asc' ? 'desc' : 'asc';
-                        return request()->fullUrlWithQuery([
-                            'sort_by' => $column,
-                            'sort_direction' => request('sort_by') === $column ? $direction : 'asc'
-                        ]);
+                    if (!function_exists('sortUrl')) {
+                        function sortUrl($column)
+                        {
+                            $direction = request('sort_direction') === 'asc' ? 'desc' : 'asc';
+                            return request()->fullUrlWithQuery([
+                                'sort_by' => $column,
+                                'sort_direction' => request('sort_by') === $column ? $direction : 'asc'
+                            ]);
+                        }
                     }
                 @endphp
 
